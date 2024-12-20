@@ -1,12 +1,16 @@
 <script lang="ts">
+import axios from 'axios'
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+
 export default {
   data() {
     return {
       showForgotPasswordForm: false,
       message: 'Sign in to your account',
-      email: '',
+      login: '',
       password: '',
-      emailCheck: false,
+      loginCheck: false,
       passwordCheck: false
     }
   },
@@ -16,6 +20,24 @@ export default {
     }
   },
   methods: {
+    async authenticate() {
+      console.log(import.meta.)
+      try {
+        const response = await axios.post(`http://localhost:8080/api/v1/auth/login`, {
+          login: this.login,
+          password: this.password
+        });
+
+        localStorage.setItem('token', response.data.token);
+
+        this.$router.push('/');
+
+      } catch (error) {
+        console.error('Login failed', error);
+        this.loginCheck = true;
+        this.passwordCheck = true;
+      }
+    },
 
   },
 }
@@ -29,12 +51,12 @@ export default {
         <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">{{ message }}</h2>
       </div>
       <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form v-if="!showForgotPasswordForm" class="space-y-6" @submit.prevent="login" method="POST">
+        <form v-if="!showForgotPasswordForm" class="space-y-6" @submit.prevent="authenticate" method="POST">
           <div>
-            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+            <label for="login" class="block text-sm font-medium leading-6 text-gray-900">Login</label>
             <div class="mt-1">
-              <input id="email" name="email" type="email" autocomplete="email" v-model="email" required
-                     :class="[emailCheck ? 'border-input-error' : 'border-0 ',
+              <input id="login" name="login"  v-model="login" required
+                     :class="[loginCheck ? 'border-input-error' : 'border-0 ',
                   'block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6']">
             </div>
           </div>
@@ -50,7 +72,7 @@ export default {
                      :class="[passwordCheck ? 'border-input-error' : 'border-0',
                    'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6']" >
             </div>
-            <p v-if="emailCheck || passwordCheck" class="text-red-500">Incorrect login or email</p>
+            <p v-if="loginCheck || passwordCheck" class="text-red-500">Incorrect login or password</p>
           </div>
           <div>
             <button type="submit" class="signInButton flex w-full justify-center rounded-md px-3 py-1.5  text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
@@ -58,9 +80,9 @@ export default {
         </form>
         <form v-else class="space-y-6" action="#" method="POST">
           <div>
-            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+            <label for="login" class="block text-sm font-medium leading-6 text-gray-900">Login</label>
             <div class="mt-1">
-              <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input id="login" name="login" type="login" autocomplete="login" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               <button @click="showForgotPasswordForm = false" type="button" class="font-semibold text-indigo-600 hover:text-indigo-500 focus:outline-none">Back to login</button>
             </div>
           </div>
