@@ -1,7 +1,8 @@
 <script lang="ts">
-import axios from 'axios'
-const baseUrl = import.meta.env.VITE_BASE_URL;
 
+import { LoginParams } from '@/types/login'
+import { login } from '@/api/auth'
+import { log } from 'node:util'
 
 export default {
   data() {
@@ -21,24 +22,25 @@ export default {
   },
   methods: {
     async authenticate() {
-      console.log(import.meta.)
-      try {
-        const response = await axios.post(`http://localhost:8080/api/v1/auth/login`, {
-          login: this.login,
-          password: this.password
-        });
 
-        localStorage.setItem('token', response.data.token);
+      const credentials: LoginParams = {
+        login: this.login,
+        password: this.password,
+      };
+      console.log(this.login)
+
+      try {
+        const response = await login(credentials);
+        localStorage.setItem('token', response.token);
 
         this.$router.push('/');
-
       } catch (error) {
-        console.error('Login failed', error);
+
+        console.error('Login failed:', error);
         this.loginCheck = true;
         this.passwordCheck = true;
       }
-    },
-
+    }
   },
 }
 </script>
