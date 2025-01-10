@@ -8,9 +8,9 @@ export const authGuard = (
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  if (to.path === '/login' || to.path === '/register') {
-    next();
-  } else if (!isAuthenticated()) {
+  if (isAuthenticated() && (to.path === '/login' || to.path === '/register')) {
+    next('/');
+  } else if (!isAuthenticated() && to.path !== '/login' && to.path !== '/register') {
     next('/login');
   } else {
     next();

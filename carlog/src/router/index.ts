@@ -2,6 +2,7 @@ import { createRouter, createWebHistory} from 'vue-router'
 import type {RouteRecordRaw} from 'vue-router'
 import LoginView from '@/views/LoginView.vue';
 import HomeView from '@/views/HomeView.vue';
+import PageNotFound from '../components/PageNotFound.vue'
 import { authGuard } from '@/middleware/auth';
 import RegisterView from '@/views/RegisterView.vue'
 
@@ -21,6 +22,11 @@ const routes: RouteRecordRaw[] = [
     path: '/register',
     name: 'register',
     component: RegisterView
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'not-found',
+    component: PageNotFound,
   },
 ];
 

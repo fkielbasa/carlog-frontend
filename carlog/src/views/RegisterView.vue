@@ -133,9 +133,62 @@ export default {
 </script>
 
 <template>
-  <h1>Here will be register</h1>
+  <div class="flex flex-col justify-center min-h-screen bg-slate-200">
+    <div class="max-w-md mx-auto px-6 py-6 lg:px-8 rounded-md bg-gray-300">
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img class="mx-auto h-28 w-auto" src="@/assets/logo/logo.png" alt="main logo">
+        <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">{{ message }}</h2>
+      </div>
+      <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form v-if="currentStep === 1" @submit.prevent="handleNextStep" class="space-y-6" method="POST">
+          <div>
+            <label for="firstName" class="block text-sm font-medium leading-6 text-gray-900">First Name</label>
+            <input id="firstName" v-model="personalData.firstName" required class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300">
+          </div>
+          <div>
+            <label for="lastName" class="block text-sm font-medium leading-6 text-gray-900">Last Name</label>
+            <input id="lastName" v-model="personalData.lastName" required class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300">
+          </div>
+          <div>
+            <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Address</label>
+            <input id="address" v-model="personalData.address" required class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300">
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
+            <input id="email" v-model="personalData.email" required class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300">
+          </div>
+          <div>
+            <label for="phoneNumber" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
+            <input id="phoneNumber" v-model="personalData.phoneNumber" required class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300">
+          </div>
+          <p v-if="errors.personal" class="text-red-500">{{ errors.personal }}</p>
+          <p v-if="errors.phoneNumber" class="text-red-500">{{ errors.phoneNumber }}</p>
+          <div>
+            <button type="submit" class="flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm bg-indigo-600 hover:bg-indigo-500">Next</button>
+          </div>
+        </form>
+
+        <form v-else @submit.prevent="registerUser" class="space-y-6" method="POST">
+          <div>
+            <label for="login" class="block text-sm font-medium leading-6 text-gray-900">Login</label>
+            <input id="login" v-model="loginData.login" required class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300">
+          </div>
+          <div>
+            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+            <input id="password" type="password" v-model="loginData.password" required class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300">
+          </div>
+          <div>
+            <label for="confirmPassword" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
+            <input id="confirmPassword" type="password" v-model="loginData.confirmPassword" required class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300">
+          </div>
+          <p v-if="errors.confirmPassword" class="text-red-500">{{ errors.confirmPassword }}</p>
+          <p v-if="errors.password" class="text-red-500">{{ errors.password }}</p>
+          <p v-if="errors.general" class="text-red-500">{{ errors.general }}</p>
+          <div>
+            <button type="submit" class="flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm bg-indigo-600 hover:bg-indigo-500">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
-
-<style scoped>
-
-</style>
