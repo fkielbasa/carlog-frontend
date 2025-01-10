@@ -2,6 +2,8 @@
 import { useRouter } from 'vue-router';
 import Sidebar from '@/components/Sidebar.vue';
 import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue'
+import MainContent from '@/components/MainContent.vue'
 
 </script>
 
@@ -10,9 +12,10 @@ import Header from '@/components/Header.vue';
     <Sidebar />
     <div class="flex flex-col flex-grow">
       <Header />
-      <div class="p-4 flex-grow">
+      <MainContent class="flex-grow">
         <router-view />
-      </div>
+      </MainContent>
+      <Footer/>
     </div>
   </div>
 </template>

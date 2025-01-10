@@ -11,12 +11,13 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'home',
     component: HomeView,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, title: "Dashboard" },
     children: [
       {
         path: '/vehicles',
         name: 'vehicle',
-        component: VehicleView
+        component: VehicleView,
+        meta: { title: "Vehicles" }
       }
     ]
   },
