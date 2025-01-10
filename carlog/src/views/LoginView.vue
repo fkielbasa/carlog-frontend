@@ -1,7 +1,7 @@
 <script lang="ts">
 
 import { LoginParams } from '@/types/login'
-import { login } from '@/api/auth'
+import { decodeToken, login } from '@/api/auth'
 import { log } from 'node:util'
 
 export default {
@@ -27,12 +27,10 @@ export default {
         login: this.login,
         password: this.password,
       };
-      console.log(this.login)
 
       try {
         const response = await login(credentials);
         localStorage.setItem('token', response.token);
-
         this.$router.push('/');
       } catch (error) {
 
