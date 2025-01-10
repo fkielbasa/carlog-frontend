@@ -4,14 +4,21 @@ import LoginView from '@/views/LoginView.vue';
 import HomeView from '@/views/HomeView.vue';
 import PageNotFound from '../components/PageNotFound.vue'
 import { authGuard } from '@/middleware/auth';
-import RegisterView from '@/views/RegisterView.vue'
-
+import RegisterView from '@/views/RegisterView.vue';
+import VehicleView from '@/views/VehicleView.vue';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
     component: HomeView,
     meta: { requiresAuth: true },
+    children: [
+      {
+        path: '/vehicles',
+        name: 'vehicle',
+        component: VehicleView
+      }
+    ]
   },
   {
     path: '/login',
