@@ -3,15 +3,9 @@ import { LoginResponse, LoginParams } from '../types/login'
 import { RegisterResponse, RegisterParams } from '../types/register'
 import { TokenPayload } from '../types/token'
 import { jwtDecode } from 'jwt-decode'
+import { apiClient } from './axios'
 
 
-
-const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
 export const decodeToken = (): TokenPayload => {
   const token = localStorage.getItem('token');
   if (token) {
