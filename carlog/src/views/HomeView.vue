@@ -3,7 +3,6 @@ import { useRouter } from 'vue-router';
 import Sidebar from '@/components/Sidebar.vue';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue'
-import MainContent from '@/components/MainContent.vue'
 
 </script>
 
@@ -12,9 +11,9 @@ import MainContent from '@/components/MainContent.vue'
     <Sidebar />
     <div class="flex flex-col flex-grow">
       <Header />
-      <MainContent class="flex-grow">
+      <div class="flex-grow overflow-auto">
         <router-view />
-      </MainContent>
+      </div>
       <Footer/>
     </div>
   </div>
