@@ -19,10 +19,15 @@
         v-for="vehicle in vehicles"
         :key="vehicle.id"
         :vehicle="vehicle"
+        @update="updateVehicleInList"
       />
     </div>
 
-    <AddVehicle v-if="isAddVehicleModalOpen" @close="closeAddVehicleModal" />
+    <AddVehicle
+      v-if="isAddVehicleModalOpen"
+      @close="closeAddVehicleModal"
+      @add-vehicle="addVehicleToList"
+    />
   </div>
 </template>
 
@@ -42,6 +47,15 @@ const openAddVehicleModal = () => {
   isAddVehicleModalOpen.value = true;
 };
 
+const updateVehicleInList = (updatedVehicle) => {
+  const index = vehicles.value.findIndex(vehicle => vehicle.id === updatedVehicle.id);
+  if (index !== -1) {
+    vehicles.value[index] = updatedVehicle;
+  }
+};
+const addVehicleToList = (newVehicle) => {
+  vehicles.value.push(newVehicle);
+};
 const closeAddVehicleModal = () => {
   isAddVehicleModalOpen.value = false;
 };

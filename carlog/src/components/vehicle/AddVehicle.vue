@@ -57,11 +57,13 @@ const newVehicle = ref({
   horsepower: '',
   torque: '',
 });
+const emit = defineEmits();
 
 const submitVehicle = async () => {
   try {
     const response = await addVehicle(newVehicle.value);
-    console.log('Vehicle added successfully:', response);
+    emit('close');
+    emit('add-vehicle', response);
   } catch (error) {
     console.error('Error adding vehicle:', error);
   }

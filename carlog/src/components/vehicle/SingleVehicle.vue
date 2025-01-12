@@ -59,7 +59,7 @@
       v-if="isUpdateModalOpen"
       :vehicle="vehicle"
       @close="closeUpdateModal"
-      @update="updateVehicle"
+      @update="$emit('update', $event)"
     />
   </div>
 </template>
@@ -68,6 +68,7 @@
 import { defineProps, ref } from 'vue';
 import UpdateVehicle from '@/components/vehicle/UpdateVehicle.vue'
 import { Icon } from "@iconify/vue"
+import updateVehicle from '@/components/vehicle/UpdateVehicle.vue'
 
 const props = defineProps({
   vehicle: {
@@ -94,9 +95,6 @@ const closeUpdateModal = () => {
   isUpdateModalOpen.value = false;
 };
 
-const updateVehicle = (updatedVehicle: any) => {
-  closeUpdateModal();
-};
 </script>
 
 <style scoped>

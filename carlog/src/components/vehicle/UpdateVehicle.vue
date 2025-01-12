@@ -42,6 +42,7 @@
 
 <script setup lang="ts">
 import { defineProps, ref } from 'vue';
+import { updateVehicleById } from '@/api/vehicle'
 
 const props = defineProps({
   vehicle: {
@@ -49,12 +50,20 @@ const props = defineProps({
     required: true,
   },
 });
+const emits = defineEmits(['close', 'update']);
 
 const form = ref({ ...props.vehicle });
 
-const submitUpdate = () => {
-
-};
+const submitUpdate = async () => {
+  try {
+    const response = await updateVehicleById(form.value.id, form.value);
+    console.log(form.value.id)
+    emits('update', response);
+    emits('close');
+  } catch (error) {
+    console.error('Error updating vehicle:', error);
+  }
+}
 </script>
 
 <style scoped>
