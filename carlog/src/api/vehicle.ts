@@ -25,3 +25,11 @@ export const updateVehicleById = async (id: number, request: Vehicle): Promise<V
     throw new Error('Vehicle update error occurred')
   }
 }
+export const deleteVehicleById = async (id: number): Promise<Vehicle> => {
+  try {
+    const response = await apiClient.delete(`/vehicles/${id}`);
+    return response.data;
+  } catch {
+    throw new Error('Vehicle delete error occurred')
+  }
+}

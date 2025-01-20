@@ -57,7 +57,6 @@ const form = ref({ ...props.vehicle });
 const submitUpdate = async () => {
   try {
     const response = await updateVehicleById(form.value.id, form.value);
-    console.log(form.value.id)
     emits('update', response);
     emits('close');
   } catch (error) {

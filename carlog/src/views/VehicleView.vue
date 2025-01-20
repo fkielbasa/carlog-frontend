@@ -20,6 +20,7 @@
         :key="vehicle.id"
         :vehicle="vehicle"
         @update="updateVehicleInList"
+        @delete="removeVehicleFromList"
       />
     </div>
 
@@ -55,6 +56,9 @@ const updateVehicleInList = (updatedVehicle) => {
 };
 const addVehicleToList = (newVehicle) => {
   vehicles.value.push(newVehicle);
+};
+const removeVehicleFromList = (vehicleId) => {
+  vehicles.value = vehicles.value.filter(vehicle => vehicle.id !== vehicleId);
 };
 const closeAddVehicleModal = () => {
   isAddVehicleModalOpen.value = false;

@@ -31,15 +31,15 @@
 
     <div class="flex justify-between mt-4">
       <div
-        @click="showDetails"
+        @click="openDeleteModal"
         class="flex items-center cursor-pointer space-x-2 px-4 py-2"
       >
         <Icon
-          icon="material-symbols:directions-car-outline"
+          icon="material-symbols:delete"
           width="28"
           class="mr-0.5"
         />
-        Details
+        Delete
       </div>
 
       <div
@@ -61,6 +61,12 @@
       @close="closeUpdateModal"
       @update="$emit('update', $event)"
     />
+    <DeleteVehicle
+      v-if="isDeleteModalOpen"
+      :vehicle="vehicle"
+      @close="closeDeleteModal"
+      @delete="$emit('delete', $event)"
+    />
   </div>
 </template>
 
@@ -68,7 +74,7 @@
 import { defineProps, ref } from 'vue';
 import UpdateVehicle from '@/components/vehicle/UpdateVehicle.vue'
 import { Icon } from "@iconify/vue"
-import updateVehicle from '@/components/vehicle/UpdateVehicle.vue'
+import DeleteVehicle from '@/components/vehicle/DeleteVehicle.vue'
 
 const props = defineProps({
   vehicle: {
@@ -76,14 +82,19 @@ const props = defineProps({
     required: true,
   },
 });
-
+const isDeleteModalOpen = ref(false);
 const isUpdateModalOpen = ref(false);
 
-const checkServiceEntry = () => {
-
+const openDeleteModal = () => {
+  isDeleteModalOpen.value = true;
 };
 
-const showDetails = () => {
+const closeDeleteModal = () => {
+  isDeleteModalOpen.value = false;
+};
+
+
+const checkServiceEntry = () => {
 
 };
 
