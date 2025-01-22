@@ -6,18 +6,20 @@ import { jwtDecode } from 'jwt-decode'
 import { apiClient } from './axios'
 
 
-export const decodeToken = (): TokenPayload => {
+export const decodeToken = (): TokenPayload | null => {
   const token = localStorage.getItem('token');
   if (token) {
     try {
-      return jwtDecode(token);
+      const decoded = jwtDecode<TokenPayload>(token);
+      localStorage.setItem('role', decoded.Role);
+      return decoded
     } catch (error) {
       console.error('Invalid token', error);
+      localStorage.removeItem('token');
     }
   }
   return null;
-}
-
+};
 export const login = async (credentials: LoginParams): Promise<LoginResponse> => {
   try {
     const response = await apiClient.post('/auth/login', credentials);

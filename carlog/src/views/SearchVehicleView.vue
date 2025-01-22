@@ -13,6 +13,7 @@ onMounted(async () => {
     filteredVehicles.value = vehicles.value;
 });
 
+
 const searchVehicle = () => {
   filteredVehicles.value = vehicles.value.filter((vehicle: any) =>
     vehicle.vin.toLowerCase().startsWith(vin.value.toLowerCase())

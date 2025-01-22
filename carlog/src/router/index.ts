@@ -6,6 +6,8 @@ import PageNotFound from '../components/PageNotFound.vue'
 import { authGuard } from '@/middleware/auth';
 import RegisterView from '@/views/RegisterView.vue';
 import VehicleView from '@/views/VehicleView.vue';
+import SearchVehicleView from '../views/SearchVehicleView.vue'
+import VehicleDetails from '../views/VehicleDetails.vue'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -17,7 +19,19 @@ const routes: RouteRecordRaw[] = [
         path: '/vehicles',
         name: 'vehicle',
         component: VehicleView,
-        meta: { title: "Vehicles" }
+        meta: { title: "Vehicles", requiresRole: 'CLIENT' }
+      },
+      {
+        path: '/search-vehicle',
+        name: 'search-vehicle',
+        component: SearchVehicleView,
+        meta: { title: 'Search Vehicle', requiresRole: 'MECHANIC' },
+      },
+      {
+        path: '/vehicle/:id/details',
+        name: 'details',
+        component: VehicleDetails,
+        meta: { title: 'Details', requiresRole: 'MECHANIC' }
       }
     ]
   },

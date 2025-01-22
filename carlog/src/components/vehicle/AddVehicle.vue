@@ -4,32 +4,36 @@
       <h3 class="text-xl font-semibold mb-4">Add vehicle</h3>
 
       <form @submit.prevent="submitVehicle">
-        <div class="mb-4">
+        <div class="mb-1">
           <label for="brand" class="block text-sm font-medium text-gray-700">Brand</label>
           <input v-model="newVehicle.brand" id="brand" type="text" class="mt-1 p-2 w-full border border-gray-300 rounded-md" required />
         </div>
 
-        <div class="mb-4">
+        <div class="mb-1">
           <label for="model" class="block text-sm font-medium text-gray-700">Model</label>
           <input v-model="newVehicle.model" id="model" type="text" class="mt-1 p-2 w-full border border-gray-300 rounded-md" required />
         </div>
 
-        <div class="mb-4">
+        <div class="mb-1">
           <label for="year" class="block text-sm font-medium text-gray-700">Year</label>
           <input v-model="newVehicle.year" id="year" type="text" class="mt-1 p-2 w-full border border-gray-300 rounded-md" required />
         </div>
 
-        <div class="mb-4">
+        <div class="mb-1">
           <label for="vin" class="block text-sm font-medium text-gray-700">VIN</label>
           <input v-model="newVehicle.vin" id="vin" type="text" class="mt-1 p-2 w-full border border-gray-300 rounded-md" required />
         </div>
-        <div class="mb-4">
+        <div class="mb-1">
           <label for="horsepower" class="block text-sm font-medium text-gray-700">Horsepower</label>
           <input v-model="newVehicle.horsepower" id="vin" type="text" class="mt-1 p-2 w-full border border-gray-300 rounded-md" required />
         </div>
-        <div class="mb-4">
+        <div class="mb-1">
           <label for="torque" class="block text-sm font-medium text-gray-700">Torque</label>
           <input v-model="newVehicle.torque" id="vin" type="text" class="mt-1 p-2 w-full border border-gray-300 rounded-md" required />
+        </div>
+        <div class="mb-1">
+          <label for="torque" class="block text-sm font-medium text-gray-700">Mileage</label>
+          <input v-model="newVehicle.mileage" id="vin" type="text" class="mt-1 p-2 w-full border border-gray-300 rounded-md" required />
         </div>
 
         <div class="flex justify-between items-center mt-6">
@@ -56,6 +60,7 @@ const newVehicle = ref({
   vin: '',
   horsepower: '',
   torque: '',
+  mileage: ''
 });
 const emit = defineEmits();
 

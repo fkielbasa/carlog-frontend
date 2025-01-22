@@ -1,6 +1,12 @@
 import { apiClient } from './axios'
 import { Vehicle } from '../types/vehicle'
-
+export const getVehicles = async (): Promise<Vehicle> => {
+  try {
+    return await apiClient.get('/vehicles')
+  } catch {
+    throw new Error("Get vehicles error occurred")
+  }
+}
 export const addVehicle = async (request: Vehicle ): Promise<Vehicle> => {
   try {
     const response = await apiClient.post('/vehicles', request);
@@ -33,3 +39,11 @@ export const deleteVehicleById = async (id: number): Promise<Vehicle> => {
     throw new Error('Vehicle delete error occurred')
   }
 }
+export const getVehicleById = async (id: number): Promise<Vehicle> => {
+  try {
+    const response = await apiClient.get(`/vehicles/${id}`);
+    return response.data;
+  } catch {
+    throw new Error('Get vehicle by userId error occurred');
+  }
+};
