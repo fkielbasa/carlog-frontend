@@ -20,7 +20,7 @@ onMounted(() => {
       <ul class="space-y-2 p-4">
         <li>
           <router-link to="/" class="block px-4 py-2 rounded hover:bg-gray-700">
-            Dashboard
+            Start
           </router-link>
         </li>
         <template v-if="role === 'CLIENT'">

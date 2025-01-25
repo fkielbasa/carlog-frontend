@@ -9,13 +9,22 @@ import VehicleView from '@/views/VehicleView.vue';
 import SearchVehicleView from '../views/SearchVehicleView.vue'
 import VehicleDetails from '../views/VehicleDetails.vue'
 import Profile from '../views/Profile.vue'
+import Service from '../components/VehicleService.vue'
+import Services from '../components/Services.vue'
+import StartView from '../views/StartView.vue'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
     component: HomeView,
-    meta: { requiresAuth: true, title: "Dashboard" },
+    meta: { requiresAuth: true,},
     children: [
+      {
+        path: '',
+        name: 'start',
+        component: StartView,
+        meta: { title: 'Start' },
+      },
       {
         path: '/vehicles',
         name: 'vehicle',
@@ -39,6 +48,18 @@ const routes: RouteRecordRaw[] = [
         name: 'profile',
         component: Profile,
         meta: { title: 'Profile'}
+      },
+      {
+        path: '/vehicle/:id/services',
+        name: 'vehicle-services',
+        component: Service,
+        meta: { title: 'Vehicle Service', requiresRole: 'CLIENT'}
+      },
+      {
+        path: '/services',
+        name: 'Services',
+        component: Services,
+        meta: { title: 'Services', requiresRole: 'CLIENT'}
       }
     ]
   },

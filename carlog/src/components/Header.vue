@@ -39,11 +39,6 @@ const logout = () => {
             </router-link>
           </li>
           <li>
-            <router-link to="/settings" class="block px-4 py-2 hover:bg-gray-100">
-              Settings
-            </router-link>
-          </li>
-          <li>
             <button @click="logout" class="block w-full text-left px-4 py-2 hover:bg-gray-100">
               Logout
             </button>

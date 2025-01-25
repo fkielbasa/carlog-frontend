@@ -17,7 +17,7 @@
     </div>
     <div class="mt-4">
       <div
-        @click="checkServiceEntry"
+        @click="checkServiceEntry(vehicle.id)"
         class="py-2 px-4 mb-1 flex items-center justify-center cursor-pointer"
       >
         <Icon
@@ -75,6 +75,7 @@ import { defineProps, ref } from 'vue';
 import UpdateVehicle from '@/components/vehicle/UpdateVehicle.vue'
 import { Icon } from "@iconify/vue"
 import DeleteVehicle from '@/components/vehicle/DeleteVehicle.vue'
+import router from '@/router'
 
 const props = defineProps({
   vehicle: {
@@ -94,8 +95,8 @@ const closeDeleteModal = () => {
 };
 
 
-const checkServiceEntry = () => {
-
+const checkServiceEntry = (id: number) => {
+  router.push(`/vehicle/${id}/services`);
 };
 
 const showUpdateModal = () => {

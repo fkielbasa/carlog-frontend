@@ -4,5 +4,7 @@ export interface Service {
   mileage: string,
   date: string,
   description: string,
-  mechanicId: number
+  mechanicId: number,
+  vehicle: string,
+  workshop: string
 }

@@ -20,6 +20,10 @@ export const decodeToken = (): TokenPayload | null => {
   }
   return null;
 };
+export const getUserId = (): string | null => {
+  const decodedToken = decodeToken();
+  return decodedToken ? decodedToken.id : null;
+};
 export const login = async (credentials: LoginParams): Promise<LoginResponse> => {
   try {
     const response = await apiClient.post('/auth/login', credentials);

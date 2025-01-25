@@ -7,4 +7,5 @@ export interface Vehicle {
   vin: string,
   horsepower: string,
   torque: string;
+  mileage: string;
 }
