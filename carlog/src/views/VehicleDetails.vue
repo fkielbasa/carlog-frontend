@@ -70,19 +70,21 @@ import { getVehicleById } from '@/api/vehicle'
 import { Vehicle } from '@/types/vehicle'
 import { addServiceEntry } from '@/api/service'
 import { Service } from '@/types/service'
-import { decodeToken } from '@/api/auth'
+import { useToast } from 'vue-toastification'
+import { decodeToken} from '@/api/auth'
 
 const route = useRoute();
 const vehicleId = route.params.id;
+const toast = useToast();
+const user = decodeToken();
 const vehicle = ref<Vehicle>();
-const user = ref(decodeToken());
 const service = ref<Service>({
   date: '',
   price: '',
   mileage: '',
   description: '',
-  vehicleId: vehicleId,
-  mechanicId: user.value.id
+  vehicleId: Number(vehicleId),
+  mechanicId: Number(user.id)
 });
 
 onMounted(async () => {
@@ -90,6 +92,18 @@ onMounted(async () => {
   vehicle.value = response;
 });
 const addService = async () => {
-  await addServiceEntry(service);
+  try {
+    await addServiceEntry(service.value);
+    console.log(user.id)
+    toast.success('Success!');
+    service.value = {
+      date: '',
+      price: '',
+      mileage: '',
+      description: '',
+    };
+  } catch {
+    toast.error('An error occurred. Please try again.');
+  }
 }
 </script>

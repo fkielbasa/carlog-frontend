@@ -8,6 +8,7 @@ import RegisterView from '@/views/RegisterView.vue';
 import VehicleView from '@/views/VehicleView.vue';
 import SearchVehicleView from '../views/SearchVehicleView.vue'
 import VehicleDetails from '../views/VehicleDetails.vue'
+import Profile from '../views/Profile.vue'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -32,6 +33,12 @@ const routes: RouteRecordRaw[] = [
         name: 'details',
         component: VehicleDetails,
         meta: { title: 'Details', requiresRole: 'MECHANIC' }
+      },
+      {
+        path: '/profile',
+        name: 'profile',
+        component: Profile,
+        meta: { title: 'Profile'}
       }
     ]
   },
